@@ -12,7 +12,7 @@
             </div>
         <form method="post" action="#" role="form" id="infoProfile"  enctype="multipart/form-data">
         <input type="hidden" class="form-control" id="ref_code" name="ref_code" value="<?php echo $this->uri->segment(3); ?>">
-    
+ 
         <div class="row">
             <div class="form-group">
                 <label for="Title" style="text-decoration: underline;">Uploaded photo :</label> <br/>
@@ -130,7 +130,7 @@
 </html>
   <script>
     $(document).ready(function(){
-  
+
     var ref_code = $('#ref_code').val();
     var galleryUploader = new qq.FineUploader({
         element: document.getElementById("fine-uploader-gallery"),      
@@ -173,6 +173,8 @@
             responseProperty: 'error',
         }
     });
+});
+
 
     function set_cover(id,ref_code)
     {

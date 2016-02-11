@@ -16,6 +16,7 @@
                     <tr>
                         <th>id</th>
                         <th>Album name</th>
+                        <th>Catergories</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -24,6 +25,20 @@
                     <tr>
                         <td><?php echo $content['item_id'];?></td>
                         <td><a href="<?php echo base_url();?>index.php/malongyeradmin/add_photo_album/<?php echo $content['item_id'];?>"><?php echo $content['item_name'];?></a></td>
+                        <td>
+                            <select class="form-control" id="catergories" onchange="update_catergories('<?php echo $content['item_id'];?>',catergories)">
+                                    <option>select catergories</option>
+                                    <option value="pre_wedding">Pre-wedding</option>
+                                    <option value="wedding_presentation">Wedding-Presentation</option>
+                                    <option value="engagement">Engagement</option>
+                                    <option value="wedding_reception">Wedding-reception</option>
+                                    <option value="wedding_cinema">Wedding-cinema</option>
+                                    <option value="event_video">Party Event (video) </option>
+                                    <option value="event_photo">Party Event (photo)</option>
+                                    <option value="presentation">Presentation</option>
+                                    <option value="graphic_design">Graphic design</option>
+                            </select>
+                       </td>
                         <td><button class="btn btn-danger" onclick="javascript:content_remove(<?php echo $content['item_id'];?>)">Delete album</button></td>
                     </tr>
                     <?php } ?>
@@ -74,4 +89,21 @@ function add_item_submit()
     });
 }
 
+function update_catergories(item_id,catergories)
+{   
+    var new_cat = catergories.value;
+    $.ajax({
+        method: "GET",
+        url: '<?php echo base_url();?>index.php/malongyeradmin/set_catergories',
+        data: { 
+            'item_id': item_id, 
+            'catergories' : new_cat
+        },
+    }) 
+    .done(function() {
+        alert('completed !!');
+        window.location.reload();
+    });
+
+}
 </script>

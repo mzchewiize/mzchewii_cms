@@ -44,7 +44,7 @@
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
              <ul class="nav" id="side-menu">       
-                <li><a href="<?php echo site_url('malongyeradmin/main_content'); ?>"><i class="fa fa-sitemap fa-fw"></i>ALBUM Management</a></li>
+                <li><a href="<?php echo site_url('malongyeradmin/main_content'); ?>"><i class="fa fa-sitemap fa-fw"></i> ALBUM Management</a></li>
               <li><a href="<?php echo site_url('main/logout'); ?>"><i class="fa fa-edit fa-fw"></i> Sign out</a></li>
                
             </ul>
