@@ -78,13 +78,14 @@
 <div class="row">
         <div class="form-group">
             <label for="Title" style="text-decoration: underline;">Uploaded photo :</label> <br/>
-            <div class="row" style="margin-left:10px;">
+            <div class="row">
               <div class="parent-wrapper">
                 <div class="parent">
                     <?php foreach($photos as $photo) { ?>
-                    <div class="child"><img  src="<?php echo base_url();?>webroot/timthumb.php?src=<?php echo base_url();?>webroot/files/<?php echo @$photo['uuid'].'/'.@$photo['image'];?>&w=200&h=200&a=c" />
-                      <p> <input type="radio" name="cover" value="<?php echo $photo['item_image_id'];?>" <?php echo (@$photo['cover'] == 1) ? 'checked=checked' : null; ?> onclick="set_cover('<?php echo $photo['item_image_id'];?>','<?php echo $photo['ref_code'];?>')"> Set as main photo</p>
-                      <p> <i class="fa fa-trash-o" onclick="manual_delete_image('<?php echo $photo['item_image_id'];?>','<?php echo $photo['uuid'];?>','<?php echo $photo['image'];?>')" style="cursor:pointer;"> Remove</i></p>
+                    <div class="child">
+                        <img  src="<?php echo base_url();?>webroot/timthumb.php?src=<?php echo base_url();?>webroot/files/<?php echo @$photo['uuid'].'/'.@$photo['image'];?>&w=200&h=200&a=c" />
+                       <input type="radio" name="cover" value="<?php echo $photo['item_image_id'];?>" <?php echo (@$photo['cover'] == 1) ? 'checked=checked' : null; ?> onclick="set_cover('<?php echo $photo['item_image_id'];?>','<?php echo $photo['ref_code'];?>')"> Set as main photo
+                      <i class="fa fa-trash-o" onclick="manual_delete_image('<?php echo $photo['item_image_id'];?>','<?php echo $photo['uuid'];?>','<?php echo $photo['image'];?>')" style="cursor:pointer;"> Remove</i>
                    
                     </div>
                     <?php } ?>

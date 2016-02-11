@@ -5,84 +5,33 @@
             <div class="row">
                 <div class="col-lg-12">
                       <div class="row" style="margin-top:50px;">
-                         <h3 class="page-header" style="margin-top:-10px">Define content infomation<br/>
-                        <small>A description of your space displayed on your public page.</small>
+                         <h3 class="page-header" style="margin-top:-10px">Add photo to album<br/>
                          </h3>
                      </div>
                  </div>
             </div>
-        <form method="post" action="<?php echo site_url('wizcationpartner/submit_information');?>" role="form" id="infoProfile"  enctype="multipart/form-data">
-        <input type="hidden" class="form-control" id="property_code" name="property_code" value="<?php echo $header_user[0]['property_code']; ?>">
-        <input type="hidden" class="form-control" id="ref_code" name="ref_code" value="<?php echo generateRandomString(10);?>">
-        
-        <div class="form-group">
-            <label for="Title">Subject:</label> <span>subject of your infomation property</span><br/>
-            <input type="text" class="form-control"  name="content_subject"value="<?php echo @$content[0]['content_subject'];?>">
-        </div>
-         <div class="form-group">
-            <label for="Title">Hilight:</label> <span>hilight of your infomation property</span><br/>
-           <textarea name="content_hilight" data-provide="markdown" rows="10"><?php echo @$content[0]['content_hilight'];?></textarea>
-        </div>
-         <div class="form-group">
-            <label for="Title">Detail:</label> <span>detail of your infomation property</span><br/>
-           <textarea name="content_detail" data-provide="markdown" rows="10"><?php echo @$content[0]['content_detail'];?></textarea>
-        </div>
-        <div class="form-group">
-            <label for="Title">Keyword or hashtag :</label> <span>hashtag or keryword of your property</span><br/>
-            <input type="text" class="form-control"  data-role="tagsinput"  id="hashtag" name="hashtag"value="<?php echo @$content[0]['hashtag'];?>">
-        </div>
-
-         <div class="form-group">   
-               <label style="text-decoration: underline;">Additional for search options</label>
-                <div class="row" style="margin-left:10px;">
-                <?php
-                        $array_check = array();
-                        for($j=0;$j<count(@$catergory_selected);$j++){
-                            array_push($array_check,@$catergory_selected[$j]['cat_id']);
-                        }
-                   ?>
-                <?php for($i=1;$i<=count($item_info);$i++){ ?>
-                        <?php if($i%4==1){  echo '<div class="col-sm-4"><div class="checkbox">'; } ?>
-                        <label>
-                            <input <?php echo in_array($item_info[$i-1]['item_info_id'],$array_check) ? "checked" : "";?> type="checkbox" name="category[]" value="<?php echo $item_info[$i-1]['item_info_id'];?>"><?php echo $item_info[$i-1]['item_info_name'];?></label><br>
-                        <?php if($i%4==0){  echo '</div></div>';} ?>
-                <?php } ?>
-                </div>
-        </div><br/>
-        <div style="clear:both"></div>
+        <form method="post" action="#" role="form" id="infoProfile"  enctype="multipart/form-data">
+        <input type="hidden" class="form-control" id="ref_code" name="ref_code" value="<?php echo $this->uri->segment(3); ?>">
+    
         <div class="row">
-        <div class="col-xs-6 col-sm-4">
-            <label>Price</label>
-             <input type="number" class="form-control"  id="content_price" name="content_price"value="<?php echo @$content[0]['content_price'];?>">
-        </div>
-        <div class="col-xs-6 col-sm-4">
-            <label>Discount</label>
-                 <input type="number" class="form-control" id="content_discount" name="content_discount"value="<?php echo @$content[0]['content_discount'];?>">
-        </div>
-        <div class="col-xs-6 col-sm-4">
-         <label for="Title">Price after discount:</label> <span></span>
-            <input type="number" class="form-control"  id="content_price_discount" name="content_price_discount"value="<?php echo @$content[0]['content_price_discount'];?>">
-           </div>
-        </div>
-        <div class="form-group">
-            <label for="Title">Website :</label><br/>
-           <input type="text" class="form-control" name="content_website" value="<?php echo @$content[0]['content_website'];?>"/>
-
-        </div>
-        <div class="form-group">
-            <label for="Title">Location Address :</label> <span>Your exact address is private and only shared with guests after a reservation is confirmed.</span><br/>
-           <textarea name="content_address" data-provide="markdown" rows="10"><?php echo @$content[0]['content_address'];?></textarea>
-
-        </div>
-   <!--      <div class="form-group">
-            <label for="Title">Location Map :</label> <br/>
-            <div id="map-canvas" style="height:300px;margin:auto;"> </div>
-            <div style="display:none;">
-                <input type="text" id="latitude_text" name="latitude_text" value="<?php echo @$content[0]['latitude'];?>">
-                <input type="text" id="longitude_text" name="longitude_text" value="<?php echo @$content[0]['longitude'];?>">
+            <div class="form-group">
+                <label for="Title" style="text-decoration: underline;">Uploaded photo :</label> <br/>
+                <div class="row" style="margin-left:10px;">
+                  <div class="parent-wrapper">
+                    <div class="parent">
+                        <?php foreach($photos as $photo) { ?>
+                        <div class="child" style="display:inline-block"><img  src="<?php echo base_url();?>webroot/timthumb.php?src=<?php echo base_url();?>webroot/files/<?php echo @$photo['uuid'].'/'.@$photo['image'];?>&w=200&h=200&a=c" />
+                          <p> <input type="radio" name="cover" value="<?php echo $photo['item_image_id'];?>" <?php echo (@$photo['cover'] == 1) ? 'checked=checked' : null; ?> onclick="set_cover('<?php echo $photo['item_image_id'];?>','<?php echo $photo['ref_code'];?>')"> Set as main photo</p>
+                          <p> <i class="fa fa-trash-o" onclick="manual_delete_image('<?php echo $photo['item_image_id'];?>','<?php echo $photo['uuid'];?>','<?php echo $photo['image'];?>')" style="cursor:pointer;"> Remove</i></p>
+                        </div>
+                        <?php } ?>
+                      </br/>
+                    </div>
+                </div>
+                </div>
             </div>
-        </div> -->
-               
+           </div>
+
         <div class="row">
             <label>Add a photo</label> <span>Guests love photos that highlight the features of your space.</span>
             <div class="col-lg-12">
@@ -173,39 +122,32 @@
         <br/><br/>
         </form>
 
-               </div>   </div>
-    </div>
+        </div>   
+   </div>
+</div>
     
 </body>
 </html>
   <script>
     $(document).ready(function(){
-        $('#content_discount').on('change',function(){
-            var price = $('#content_price').val();
-            var content_discount = $(this).val()/100;
-            var percent = price * content_discount;
-            var price_after_discount = price - percent;
-            $("#content_price_discount").val(Math.floor(price_after_discount));
-        });
-    });
-    var property_code = $('#property_code').val();
+  
     var ref_code = $('#ref_code').val();
     var galleryUploader = new qq.FineUploader({
         element: document.getElementById("fine-uploader-gallery"),      
         template: 'qq-simple-thumbnails-template',
         request: {
-            endpoint: '../../webroot/endpoint.php?property_code='+property_code+'&ref_code='+ref_code
+            endpoint: '../../../webroot/endpoint.php?ref_code='+ref_code
         },
         thumbnails: {
             placeholders: {
-                waitingPath: '../../webroot/placeholders/waiting-generic.png',
-                notAvailablePath: '../../webroot/placeholders/not_available-generic.png'
+                waitingPath: '../../../webroot/placeholders/waiting-generic.png',
+                notAvailablePath: '../../../webroot/placeholders/not_available-generic.png'
             }
         },
         deleteFile: {
             enabled: true,
             method: "DELETE",
-            endpoint: '../../webroot/endpoint.php'
+            endpoint: '../../../webroot/endpoint.php'
         },
         cors: {
             expected: true
@@ -231,4 +173,31 @@
             responseProperty: 'error',
         }
     });
+
+    function set_cover(id,ref_code)
+    {
+        $.ajax({
+            method: "GET",
+            url: '<?php echo base_url();?>index.php/malongyeradmin/set_cover',
+            data: { 'id' : id, 'ref_code': ref_code},
+        }) 
+        .done(function() {
+            alert('Set main photo completed!');
+            window.location.reload();
+        });
+    }
+   
+   function manual_delete_image(id, uuid, image)
+   {
+      $.ajax({
+            method: "GET",
+            url: '<?php echo base_url();?>index.php/malongyeradmin/manual_delete_photo',
+            data: { 'id' : id, 'uuid': uuid,'image' : image},
+        }) 
+        .done(function() {
+            alert('Photo has been removed');
+            window.location.reload();
+        });
+   }
+
  </script>

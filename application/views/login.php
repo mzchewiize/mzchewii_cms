@@ -3,7 +3,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><?php echo $info;?></h3>
+                        <h3 class="panel-title" style="padding:10px;"><?php echo $info;?></h3>
                     </div>
                     <div class="panel-body">
                         <form role="form" method="post" action="<?php echo site_url('main/login');?>">
@@ -17,7 +17,7 @@
                                <!-- Change this to a button or input when using this as a form -->
 
                                 <input type="submit" class="btn btn-default" value="Login">
-                                <a href="<?php echo site_url('main/register');?>">Partner Register</a>
+                             
                             </fieldset>
                             <div class="danger"><?php echo @$danger;?></div>
                         </form>

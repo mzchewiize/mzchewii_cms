@@ -127,9 +127,9 @@ class Wizcationadmin extends CI_Controller {
 
     function catergory()
     {
-         if(!$this->session->userdata('admin'))
+        if(!$this->session->userdata('admin'))
         {
-             return redirect('main/login');
+            return redirect('main/login');
         }
         else
         {

@@ -33,10 +33,10 @@ require_once "handler.php";
 
 function database_connect()
 {
-    $vars = mysql_connect('localhost','root','root');                
+    $vars = mysql_connect('localhost','root','');                
     if($vars)
     {
-        mysql_select_db('wizcationc_wiz');
+        mysql_select_db('temp');
         mysql_query("set names tis620") or die('Invalid query: ' . mysql_error());
     } 
     else 
@@ -65,8 +65,8 @@ if ($method == "POST") {
         $database = database_connect();
         if($database)
         {
-            $sql = "INSERT INTO `item_image` (`property_code`, `ref_code`,`uuid`, `image`, `cover`, `datetime_update`)
-            VALUES ('".$_GET['property_code']."', '".$_GET['ref_code']."', '".$uploader->getUID()."', '".$uploader->getUploadName()."', '', '".date('Y-m-d H:i:s')."');";
+            $sql = "INSERT INTO `item_image` (`ref_code`,`uuid`, `image`, `cover`, `datetime_update`)
+            VALUES ('".$_GET['ref_code']."', '".$uploader->getUID()."', '".$uploader->getUploadName()."', '', '".date('Y-m-d H:i:s')."');";
             mysql_query($sql);            
             
             if (mysql_affected_rows() > 0) 

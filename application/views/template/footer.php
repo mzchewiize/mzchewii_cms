@@ -1,4 +1,4 @@
-<div class="subscribe">
+<div class="subscribe" style="background-color:white;border:1px solid black;color:black">
 	<div class="container">
     	<h1>SUBSCRIBE OUR NEWSLETTER FOR <span>SECRET DEALS</span></h1>
         <input type="submit" value="Subscribe">

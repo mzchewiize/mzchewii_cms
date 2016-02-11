@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Wizcationpartner extends CI_Controller {
+class Malongyeradmin extends CI_Controller {
     var $css = array(
         'webroot/css/my_style.css',
         'webroot/css/bootstrap-theme.min.css',
@@ -60,6 +60,7 @@ class Wizcationpartner extends CI_Controller {
 
     public function index($error = '') 
     {
+        print_r($_SESSION);
         if(!$this->session->userdata('partner'))
         {
              return redirect('main/login');
@@ -77,13 +78,36 @@ class Wizcationpartner extends CI_Controller {
             $header['css'] = $this->css;
             $header['jscript'] = $this->jscript;
             $header['header_user'] = $this->admin_data;
-            $data['partner_content'] = $this->admin_model->get_where_data(array('property_code' => $this->admin_data[0]['property_code']),'partner_content');
+            $data['partner_content'] =  $this->admin_model->get_where_data(array(),'item_type');
             
             $this->load->view('template/header', $header);
             $this->load->view('partner/partner_content',$data);
             $this->load->view('template/footer');
         }
     }
+
+    function add_item_new()
+    {
+        $add_new_item = array('item_name' => $this->input->get('pcode_value'));
+        $this->admin_model->insert_data($add_new_item, $this->input->get('table'));
+        redirect("malongyeradmin/".$this->input->get('reload_page'));
+    }
+
+    function add_photo_album()
+    {
+        $album_id = $this->uri->segment(3);
+
+        $header['css'] = $this->css;
+        $header['jscript'] = $this->jscript;
+        $header['header_user'] = $this->admin_data;
+
+        $data['photos'] = $this->admin_model->get_where_data(array('ref_code' => $album_id),'item_image');
+
+        $this->load->view('template/header', $header);
+        $this->load->view('partner/partner_content_add', @$data);
+        $this->load->view('template/footer');
+    }
+
     function content_add()
     {
          if(!$this->session->userdata('partner'))

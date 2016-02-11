@@ -5,10 +5,9 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Search catergory & customize
-                        <button class="btn btn-primary" onclick="javascript:load_addItem();">Add catergory[+] </button> 
-                    
-                        <label><input type="text" onchange="add_item_submit();" name="add_item" id="add_item" style="display:none"/></label> </h1>
+                    <h1 class="page-header">Search catergory & customize <br/>
+                        <button class="btn btn-primary" onclick="javascript:load_addItem();">Add catergory[+] </button>  
+                        <label><input type="text" onchange="add_item_submit();" placeholder="Album name" name="add_item" id="add_item" style="display:none"/></label> </h1>
                 </div>
             </div>
              <table id="example" class="display" cellspacing="0" width="100%">
@@ -73,7 +72,7 @@ function add_item_submit()
      $.ajax({
         method: "GET",
         url: '<?php echo base_url();?>index.php/wizcationadmin/add_item_new',
-        data: { 'table': 'item_type', 'pcode_value' : add_item , 'key' : 'item_id','reload_page' : 'amenities'},
+        data: { 'table': 'item_type', 'pcode_value' : add_item , 'key' : 'item_id','reload_page' : 'content'},
     }) 
     .done(function() {
         alert('completed !!');
