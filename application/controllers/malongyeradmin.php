@@ -116,4 +116,9 @@ class Malongyeradmin extends CI_Controller {
         'ref_code' => $this->input->GET('item_id')
         ));
     }
+
+    function submit_removed_content()
+    {
+         $this->admin_model->delete_data(array('id' => $this->input->get('id')), 'item_image');
+    }
 }

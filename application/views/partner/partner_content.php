@@ -106,4 +106,22 @@ function update_catergories(item_id,catergories)
     });
 
 }
+
+function content_remove()
+{
+     var r = confirm('Confirm to removed this content?');
+    if(r)
+    {
+        $.ajax({
+            method: "GET",
+            url: '<?php echo base_url();?>index.php/malongyeradmin/submit_removed_content',
+            data: { 'id' : id},
+        }) 
+        .done(function() {
+            alert('Content has been removed');
+            window.location.reload();
+        });
+    }
+}
+
 </script>
